@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'prune docker data'
+                sh'''
+                docker system prune -a --volume -f
+                '''
+                echo 'start container'
+                sh'''
+                docker-compose up -d --no-color --wait
+                '''               
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                sh'curl 
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
+    }
+}
+
